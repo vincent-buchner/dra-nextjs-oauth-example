@@ -4,7 +4,7 @@ from django.shortcuts import render
 # views.py
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .middleware import verify_google_token, verify_access_token
+from .middleware import verify_access_token
 
 # @api_view(['GET'])
 # def protected_view(request):

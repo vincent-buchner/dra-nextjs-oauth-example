@@ -1,6 +1,4 @@
 # utils.py
-from google.oauth2 import id_token
-from google.auth.transport import requests
 import requests as req
 from rest_framework.exceptions import AuthenticationFailed
 from dotenv import load_dotenv
@@ -8,19 +6,7 @@ import os
 
 load_dotenv()
 
-
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
-
-def verify_google_token(token):
-    try:
-        # Verify the token
-        print(GOOGLE_CLIENT_ID)
-        print(token)
-        idinfo = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
-        print(idinfo)
-        return idinfo  # Token is valid
-    except ValueError as e:
-        raise AuthenticationFailed(f"Invalid token: {e}")
     
 def verify_access_token(access_token):
     """
