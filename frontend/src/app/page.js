@@ -5,6 +5,19 @@ import Link from "next/link";
 export default function Home() {
   const { data: session, status } = useSession();
 
+  const fetchData = async () => {
+    console.log(session)
+    const res = await fetch("http://127.0.0.1:8000/protected/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.access_token}`, // Include the token
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+  };
+
   return (
     <>
       <div className="container-fluid d-flex justify-content-center align-items-center h-100 flex-column" style={{ minHeight: "100vh" }}>
@@ -28,6 +41,7 @@ export default function Home() {
           <button className="btn btn-primary">
             <Link href="/unprotected">Unprotected Route</Link>
           </button>
+          <button className="btn btn-primary" onClick={fetchData}>Check Backend</button>
         </div>
       </div>
     </>
