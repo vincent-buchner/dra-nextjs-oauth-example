@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend  # Path to the directory with your Django backend's Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env  # Path to your Django environment file
+    # volumes:
+    #   - ./backend:/app  # Mount local code for development
+  
+  frontend:
+    build:
+      context: ./frontend  # Path to the directory with your Next.js frontend's Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env  # Path to your Next.js environment file
+    depends_on:
+    - backend
+    # volumes:
+    #   - ./frontend:/app  # Mount local code for development
